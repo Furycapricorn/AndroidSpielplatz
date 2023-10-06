@@ -1,14 +1,22 @@
 package com.example.hello_world;
 
+import static android.content.ContentValues.TAG;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 import static com.example.hello_world.BackVault.setBackButtonFunctionality;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.app.Activity;
+
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,6 +29,8 @@ import android.app.NotificationManager;
 
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.List;
 
 public class SecondFragment extends Fragment {
 
@@ -54,6 +64,45 @@ public class SecondFragment extends Fragment {
         binding.buttonNotify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("Noty");
+                /*
+                final PackageManager pm = getActivity().getPackageManager();
+                List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
+                for (ApplicationInfo packageInfo : packages){
+                    Log.d(TAG, "Installed Package: " + packageInfo.packageName);
+                    Log.d(TAG, "Source dir: " + packageInfo.sourceDir);
+                    Log.d(TAG, "Launch Activity: " + pm.getLaunchIntentForPackage(packageInfo.packageName));
+                }
+
+                */
+                //com.android.shell
+                //com.sonelli.juicessh
+
+                Activity appsActivity = getActivity();
+                Intent appIntent = appsActivity.getPackageManager().getLaunchIntentForPackage("com.sonelli.juicessh");
+
+                if (appIntent != null){
+                    System.out.println("meep");
+                    startActivity(appIntent);
+                }else {
+                    System.out.println("geeze");
+                    Uri webpage = Uri.parse("https://play.google.com/store/apps/details?id=com.sonelli.juicessh&hl=de&gl=de");
+                    Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+
+                    if (webIntent != null){
+                        startActivity(webIntent);
+                    }
+                }
+
+                /*
+                Uri webpage = Uri.parse("https://www.android.com");
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+
+                if (webIntent != null){
+                    startActivity(webIntent);
+                }
+                */
                 /*
                 String tittle="Benachrichtigung";
                 String subject="Boom erschreckt!";
@@ -66,7 +115,7 @@ public class SecondFragment extends Fragment {
 
                 notify.flags |= Notification.FLAG_AUTO_CANCEL;
                 notif.notify(0, notify);
-                 */
+                */
             }
         });
     }

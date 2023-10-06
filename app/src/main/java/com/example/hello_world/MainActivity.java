@@ -3,6 +3,7 @@ package com.example.hello_world;
 import static com.example.hello_world.BackVault.shouldAllowBack;
 import static com.google.android.material.internal.ContextUtils.getActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private Context ctx=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,5 +88,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this,
                     "BackButton disabled", Toast.LENGTH_LONG).show();
         }
+    }
+    public Context getCtx(){
+        return ctx;
     }
 }

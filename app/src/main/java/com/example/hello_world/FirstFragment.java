@@ -2,6 +2,7 @@ package com.example.hello_world;
 
 import static com.example.hello_world.BackVault.setBackButtonFunctionality;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.example.hello_world.databinding.FragmentFirstBinding;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
+
 
     @Override
     public View onCreateView(
@@ -46,5 +48,6 @@ public class FirstFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 
 }
